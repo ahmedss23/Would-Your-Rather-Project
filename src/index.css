@@ -1,0 +1,11 @@
+body {
+  margin: 0px;
+  /* overflow: scroll; */
+}
+
+.app {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}

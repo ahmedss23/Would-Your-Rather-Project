@@ -1,0 +1,29 @@
+.userdata-user-image {
+    width: 100px;
+    border: black solid  1px;
+}
+
+.userdata {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.userdata-user-info {
+    font-size: larger;
+    padding: 10px;
+    border: #E8E8E8 solid 2px;
+    height: 100px;
+    display: flex;
+    overflow: hidden;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.userdata-user-info-top {
+    height: 100%;
+    padding: 0 10px;
+    margin: 0 10px;
+    border-right: #E8E8E8 solid 2px;
+    border-left: #E8E8E8 solid 2px;
+}
