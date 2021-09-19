@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import handleInitialData from '../actions/shared'
 import LoadingBar from 'react-redux-loading'
-import { BrowserRouter as Router , Route} from 'react-router-dom'
+import { BrowserRouter as Router , Route, Switch } from 'react-router-dom'
 import NavBar from './NavBar'
 import Root from './Root'
 import Question from './Question'
@@ -28,13 +28,15 @@ class App extends Component {
                 <Fragment>
                   <NavBar/>
                   <div className='app'>
-                    <Route exact path='/' component={Root}/>
-                    <Route exact path='/home' component={Home} />
-                    <Route exact path='/question/:id' component={Question}/>
-                    <Route exact path='/login' component={Login}/>
-                    <Route exact path='/add' component={NewQuestion}/>
-                    <Route exact path='/leaderboard' component={LeaderBoard} />
-                    <Route path='/404' component={NotFound} />
+                    <Switch>
+                      <Route exact path='/' component={Root}/>
+                      <Route exact path='/home' component={Home} />
+                      <Route exact path='/question/:id' component={Question}/>
+                      <Route exact path='/login' component={Login}/>
+                      <Route exact path='/add' component={NewQuestion}/>
+                      <Route exact path='/leaderboard' component={LeaderBoard} />
+                      <Route path='/' component={NotFound} />
+                    </Switch>
                   </div>
                 </Fragment>}
             </div>

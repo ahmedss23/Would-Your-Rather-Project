@@ -12,8 +12,8 @@ class Question extends Component {
             questions,
             id
         } = this.props
-        if (!authedUser) return <Redirect to='/login' />
-        if (!Object.keys(questions).includes(id)) return <Redirect to='/404' />
+        if (!Object.keys(questions).includes(id)) return <Redirect to={{ pathname:'/404' , state:{ lastLocation: '/404'}}} />
+        if (!authedUser) return <Redirect to={{ pathname:'/login' , state: { lastLocation: `/question/${id}`}}} />
         const answeredQuestion = Object.keys(users[authedUser].answers)
         const answered = answeredQuestion.includes(id)
 

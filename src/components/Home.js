@@ -32,8 +32,7 @@ class Home extends Component {
             questions,
             authedUser
         } = this.props
-        if (!authedUser) return <Redirect to='/login' />
-
+        if (authedUser === '') return null
         const answeredQuestions = Object.keys(users[authedUser].answers).sort((a,b)=> questions[b].timestamp - questions[a].timestamp)   
         const allQuestions = Object.keys(questions).sort((a,b)=> questions[b].timestamp - questions[a].timestamp)   
         let unansweredQuestions = []
@@ -52,6 +51,10 @@ class Home extends Component {
             answeredQuestions,
             unansweredQuestions
         } = this.state
+        const {
+            authedUser
+        } = this.props
+        if (!authedUser) return <Redirect to={{ pathname:'/login' , state: { lastLocation: '/home'}}} />
 
         return (
             <div className='home'>

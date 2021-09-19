@@ -1,14 +1,19 @@
 import React , { Component } from 'react'
 import { connect } from 'react-redux'
 import UserData from './UserData'
+import { Redirect } from 'react-router-dom'
 
 class LeaderBoard extends Component {
     render(){
         const {
-            users
+            users,
+            authedUser
         } = this.props
 
-        //sort data by score
+        if (!authedUser) return <Redirect to={{
+            pathname: '/login',
+            state: { lastLocation: '/leaderboard'}
+        }} />
 
         const sortedUsers = Object.keys(users).sort((a,b)=>{
             let userAA = Object.keys(users[a].answers).length
@@ -30,9 +35,10 @@ class LeaderBoard extends Component {
     }
 }
 
-function mapStateToProps({ users }){
+function mapStateToProps({ users, authedUser }){
     return {
-        users
+        users,
+        authedUser
     }
 }
 

@@ -38,7 +38,7 @@ class NewQuestion extends Component {
 
         const { authedUser } = this.props
 
-        if (!authedUser) return <Redirect to='/login' />
+        if (!authedUser) return <Redirect to={{ pathname:'/login' , state: { lastLocation: '/add'}}} />
 
         return (
              <div className='new-question'>

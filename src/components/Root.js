@@ -5,35 +5,40 @@ import QuestionPoll from './QuestionPoll'
 
 class Root extends Component {
     state = {
-        question: null
+        questions: []
     }
 
     componentDidMount(){
         this.setState({
-            question: null
+            questions: []
         })
         const {
             users,
             questions,
             authedUser
         } = this.props
+
+        if(!authedUser)    return null
         const answeredQuestions = Object.keys(users[authedUser].answers)
         let unansweredQuestions = []
         Object.keys(questions).forEach(question=>{
             if(!answeredQuestions.includes(question)) unansweredQuestions.push(question)
         })
         unansweredQuestions = unansweredQuestions.sort((a,b)=> questions[b].timestamp - questions[a].timestamp)
+        console.log(unansweredQuestions)
         this.setState({
-            question: unansweredQuestions[0]
+            questions: unansweredQuestions
         })
     }
 
     render(){
         const { authedUser } = this.props
+        const { questions } = this.state
+        console.log(questions)
         if (!authedUser) return <Redirect to='/login' />
         return (
             <div>
-                {this.state.question && <QuestionPoll qid={this.state.question}/>}
+                {questions && questions.map( id => <QuestionPoll qid={id}/>)}
             </div>
         )
     }

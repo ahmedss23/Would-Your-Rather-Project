@@ -1,6 +1,6 @@
 import React , { Component } from 'react'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
+import { Redirect, withRouter } from 'react-router-dom'
 import { setAuthedUser } from '../actions/authedUser'
 import '../styles/Login.css'
 
@@ -22,12 +22,13 @@ class Login extends Component {
         e.preventDefault()
         const { selectedUser } = this.state
         this.props.dispatch(setAuthedUser(selectedUser))
-        return <Redirect to='/' />
     }
 
     render() {
-        const { users, authedUser } = this.props
-        if (authedUser) return <Redirect to='/' />
+        const { users, authedUser, location } = this.props
+        const redirectRes = location.state
+        if(authedUser && redirectRes) return <Redirect to={redirectRes.lastLocation}/>
+        else if (authedUser) return <Redirect to='/'/>
         return (
              <div className='login-panel'>
                  <div className='login-panel-top'>
@@ -59,4 +60,4 @@ function mapStateToProps({ users , authedUser}){
     }
 }
 
-export default connect(mapStateToProps)(Login)
+export default withRouter(connect(mapStateToProps)(Login))
